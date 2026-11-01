@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0e0e0d;
+  --paper: #f8f7f4;
+  --paper-2: #f2efe8;
+  --paper-3: #e6e2d8;
+  --charcoal: #252321;
+  --mute: #827e77;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-dark: rgba(255, 255, 255, 0.12);
+  --champagne: #c8a261;
+  --champagne-light: #e6d3ad;
+  --champagne-dark: #9e7b39;
+  --header-h: 4.5rem;
+  --gutter: clamp(1.25rem, 3.4vw, 3.5rem);
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --font-sans: var(--font-sans-ui), system-ui, sans-serif;
+  --font-display: var(--font-serif), Georgia, serif;
+  --font-cinema: var(--font-cinzel), serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-charcoal: var(--charcoal);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-line-dark: var(--line-dark);
+  --color-champagne: var(--champagne);
+  --color-champagne-light: var(--champagne-light);
+  --color-champagne-dark: var(--champagne-dark);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-cinema: var(--font-cinema);
+  --font-editorial: var(--font-display);
+  --font-serif: var(--font-display);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Original Shinewoods exact gutter */
+.gutter {
+  padding-left: var(--gutter) !important;
+  padding-right: var(--gutter) !important;
+  width: 100%;
+}
+
+/* Exact display and label typography from Shinewoods */
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  line-height: 0.92;
+}
+
+.font-display,
+.font-editorial,
+.editorial,
+.font-serif {
+  font-family: var(--font-display);
+}
+
+.font-cinema {
+  font-family: var(--font-cinema);
+}
+
+.label {
+  font-family: var(--font-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.label-sm {
+  font-family: var(--font-sans);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-size: 0.58rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.5s var(--ease-editorial);
+}
+
+.link-draw:hover,
+.link-draw.active {
+  background-size: 100% 1px;
+}
+
+/* Cinema camera reels animation */
+@keyframes reelSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reelSpinRev {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.brand-camera {
+  color: inherit;
+}
+
+.brand-reel-spin {
+  transform-origin: 36px 18px;
+  animation: reelSpin 12s linear infinite;
+}
+
+.brand-reel-spin-rev {
+  transform-origin: 58px 18px;
+  animation: reelSpinRev 12s linear infinite;
+}
+
+/* Custom form fields with clean editorial borders */
+.sw-field {
+  width: 100%;
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 0.25rem;
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.sw-field:focus {
+  border-bottom-color: var(--ink);
+  box-shadow: 0 1px 0 0 var(--ink);
+}
+
+.editorial-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc6ba;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mute);
 }
